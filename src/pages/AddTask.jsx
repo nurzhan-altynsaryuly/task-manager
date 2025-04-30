@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 
 export default function AddTask() {
     const [input, setInput] = useState('')
-    const [select, setSelect] = useState('Nurzhan Zhumadil')
+    const [select, setSelect] = useState('Arthur Morgan')
     const [danger, setDanger] = useState(false)
 
     const navigate = useNavigate()
@@ -41,7 +41,7 @@ export default function AddTask() {
             onChange={(e) => setInput(e.target.value)}
             ></input>
             <select className="bg-amber-50 px-5 py-2 outline-none w-100 rounded-xs hover:cursor-pointer" onChange={(e) => setSelect(e.target.value)} value={select}>
-                <option>Artur Morgan</option>
+                <option>Arthur Morgan</option>
                 <option>John Marston</option>
             </select>
             <button onClick={addTask} className="bg-blue-200 w-100 px-5 py-2 outline-none rounded-xs hover:cursor-pointer hover:bg-blue-100 transition-all duration-300">Create Task</button>
