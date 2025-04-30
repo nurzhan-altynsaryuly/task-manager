@@ -1,9 +1,6 @@
-import { useDispatch } from "react-redux"
-import { createTask } from "../store/taskSlice"
 import { Link } from "react-router"
 
 export default function TaskItem({data}) {
-    const dispatch = useDispatch()
     return (
         <div className="p-2 bg-gray-600 rounded-md mt-2 flex justify-between items-center">
             <div>
