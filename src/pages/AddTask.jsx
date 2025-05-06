@@ -1,16 +1,15 @@
 import { Link } from "react-router";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createTask } from "../store/taskSlice";
 import { useNavigate } from "react-router";
+import { useCreateTaskMutation } from "../store/apiSlice";
 
 export default function AddTask() {
     const [input, setInput] = useState('')
     const [select, setSelect] = useState('Arthur Morgan')
     const [danger, setDanger] = useState(false)
+    const [createTask, {isLoading}] = useCreateTaskMutation()
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     function addTask() {
         if(input.length < 2) {
@@ -19,11 +18,12 @@ export default function AddTask() {
             return
         }
         const task = {
+            id: String(new Date()),
             task: input,
             user: select,
             status: 'open'
         }
-        dispatch(createTask(task))
+        createTask(task)
         setInput('')
         navigate('/')
     }

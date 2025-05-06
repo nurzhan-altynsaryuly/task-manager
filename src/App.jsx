@@ -1,25 +1,21 @@
 import Header from "./components/Header"
 import TaskBlockList from "./components/TaskBlockList"
 import TaskBlock from "./components/TaskBlock"
-import { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { loadTasks } from "./store/taskSlice"
+import { useGetTasksQuery } from "./store/apiSlice"
 
 export default function App() {
 
-  const dispatch = useDispatch()
+  const {data, isLoading} = useGetTasksQuery()
 
-  useEffect(() => {
-    dispatch(loadTasks())
-  }, [])
+  if(isLoading) return <p>Loading...</p>
 
   return (
     <>
       <Header />
       <TaskBlockList>
-          <TaskBlock block='open'/>
-          <TaskBlock block='progress'/>
-          <TaskBlock block='done'/>
+          <TaskBlock block='open' data={data}/>
+          <TaskBlock block='progress' data={data}/>
+          <TaskBlock block='done' data={data}/>
        </TaskBlockList>
     </>
   )

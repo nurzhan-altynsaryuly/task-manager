@@ -1,10 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit'
-import taskReducer from './taskSlice'
+import { configureStore } from "@reduxjs/toolkit";
+import { apiSlice } from "./apiSlice";
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
-        tasks: taskReducer,
-    }
+        [apiSlice.reducerPath]: apiSlice.reducer
+    },
+    middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(apiSlice.middleware)
 })
-
-export default store

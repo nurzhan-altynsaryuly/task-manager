@@ -1,30 +1,31 @@
 import { Link } from "react-router"
 import { useLocation } from "react-router"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { changeStatus } from "../store/taskSlice"
 import { useNavigate } from "react-router"
-import { deleteTask } from "../store/taskSlice"
+import { useDeleteTaskMutation } from "../store/apiSlice"
+import { useChangeTaskMutation } from "../store/apiSlice"
 
 export default function TaskPage() {
     const data = useLocation().state
     const [status, setStatus] = useState(data.status)
+    const [deleteTask] = useDeleteTaskMutation()
+    const [changeTask] = useChangeTaskMutation()
 
-    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     function optionStatus() {
         const newData = {
+            id: data.id,
             task: data.task,
             user: data.user,
             status: status
         }
-        dispatch(changeStatus(newData))
+        changeTask(newData)
         navigate('/')
     }
 
     function deleteItem() {
-        dispatch(deleteTask(data.task))
+        deleteTask(data.id)
         navigate('/')
     }
 
