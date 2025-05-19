@@ -1,14 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
+import App from './App.js'
 import { BrowserRouter, Routes, Route } from "react-router";
-import AddTask from './pages/addTask.jsx';
-import TaskPage from './pages/TaskPage.jsx';
+import AddTask from './pages/AddTask';
+import TaskPage from './pages/TaskPage';
 import { Provider } from 'react-redux';
-import { store } from './store/index.js';
+import { store } from './store/index';
 
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById("root") as HTMLElement;
+
+createRoot(rootElement).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>

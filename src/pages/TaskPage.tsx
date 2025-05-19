@@ -1,33 +1,42 @@
-import { Link } from "react-router";
-import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useDeleteTaskMutation } from "../store/apiSlice";
 import { useChangeTaskMutation } from "../store/apiSlice";
+import { Task } from "../models/Task";
 
-export default function TaskPage() {
-  const data = useLocation().state;
-  const [status, setStatus] = useState(data.status);
+const TaskPage = () => {
+  const data: Task = useLocation().state;
+  const [status, setStatus] = useState<string>(data.status);
   const [deleteTask] = useDeleteTaskMutation();
   const [changeTask] = useChangeTaskMutation();
 
   const navigate = useNavigate();
 
-  function optionStatus() {
-    const newData = {
-      id: data.id,
-      task: data.task,
-      user: data.user,
-      status: status,
-    };
-    changeTask(newData);
-    navigate("/");
-  }
+  const optionStatus = async () => {
+    try {
+      const newData: Task = {
+        id: data.id,
+        task: data.task,
+        user: data.user,
+        status: data.status,
+      };
+      await changeTask(newData).unwrap();
+      navigate("/");
+    } catch (e) {
+      console.error("Ошибка при изменении задачи", e);
+    }
+  };
 
-  function deleteItem() {
-    deleteTask(data.id);
-    navigate("/");
-  }
+  const deleteItem = async () => {
+    try {
+      await deleteTask(data.id).unwrap();
+      navigate("/");
+    } catch (e) {
+      console.error("Ошибка при удалении задачи", e);
+    }
+  };
 
   return (
     <>
@@ -71,4 +80,6 @@ export default function TaskPage() {
       </div>
     </>
   );
-}
+};
+
+export default TaskPage;

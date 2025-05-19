@@ -1,8 +1,9 @@
-import { Link } from "react-router";
+import { FC } from "react";
+import { Link } from "react-router-dom";
 
-export default function Header() {
+const Header: FC = () => {
   return (
-    <div className="w-100% h-max p-10 bg-gray-700 rounded-md flex justify-between">
+    <div className="w-full h-max p-10 bg-gray-700 rounded-md flex justify-between">
       <p className='text-5xl font-medium font-["Inter"] text-left text-amber-50'>
         Task Manager
       </p>
@@ -25,4 +26,6 @@ export default function Header() {
       </Link>
     </div>
   );
-}
+};
+
+export default Header;

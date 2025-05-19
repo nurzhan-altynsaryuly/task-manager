@@ -1,32 +1,41 @@
-import { Link } from "react-router";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCreateTaskMutation } from "../store/apiSlice";
+import { Task } from "../models/Task";
 
-export default function AddTask() {
-  const [input, setInput] = useState("");
-  const [select, setSelect] = useState("Arthur Morgan");
-  const [danger, setDanger] = useState(false);
+const AddTask: FC = () => {
+  const [input, setInput] = useState<string>("");
+  const [select, setSelect] = useState<string>("Arthur Morgan");
+  const [danger, setDanger] = useState<boolean>(false);
   const [createTask, { isLoading }] = useCreateTaskMutation();
 
   const navigate = useNavigate();
 
-  function addTask() {
+  async function addTask() {
     if (input.length < 2) {
       setDanger(true);
       setTimeout(() => setDanger(false), 3000);
       return;
     }
-    const task = {
-      id: String(new Date()),
+
+    const task: Task = {
+      id: Date.now(),
       task: input,
       user: select,
       status: "open",
     };
-    createTask(task);
-    setInput("");
-    navigate("/");
+
+    try {
+      await createTask(task).unwrap();
+      setInput("");
+      navigate("/");
+    } catch (err) {
+      console.error("Ошибка при создании задачи:", err);
+    }
   }
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <>
@@ -66,4 +75,6 @@ export default function AddTask() {
       </div>
     </>
   );
-}
+};
+
+export default AddTask;

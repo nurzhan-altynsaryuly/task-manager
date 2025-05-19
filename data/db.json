@@ -1,22 +1,22 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "task": "Go to the gym",
-      "user": "Arthur Morgan",
-      "status": "progress"
-    },
-    {
       "id": "Tue May 06 2025 18:11:02 GMT+0500 (GMT+05:00)",
       "task": "Go to the Valentine",
       "user": "John Marston",
-      "status": "done"
+      "status": "open"
     },
     {
       "id": "Tue May 06 2025 18:12:20 GMT+0500 (GMT+05:00)",
       "task": "Go to the Saint Denis",
       "user": "Arthur Morgan",
-      "status": "open"
+      "status": "done"
+    },
+    {
+      "id": "Tue May 06 2025 23:22:45 GMT+0500 (GMT+05:00)",
+      "task": "Go to the saloon",
+      "user": "Arthur Morgan",
+      "status": "progress"
     }
   ]
 }

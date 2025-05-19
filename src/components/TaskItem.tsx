@@ -1,6 +1,14 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
-export default function TaskItem({ data }) {
+import { Task } from "../models/Task";
+
+import { FC } from "react";
+
+interface TaskItemProps {
+  data: Task;
+}
+
+const TaskItem: FC<TaskItemProps> = ({ data }) => {
   return (
     <div className="p-2 bg-gray-600 rounded-md mt-2 flex justify-between items-center">
       <div>
@@ -16,4 +24,6 @@ export default function TaskItem({ data }) {
       </Link>
     </div>
   );
-}
+};
+
+export default TaskItem;
